@@ -1,2 +1,3 @@
 # posit-snowflake-yyz
-Posit + Snowflake Native App Enablement Session
+Posit + Snowflake Native App Enablement Session -- Toronto
+
