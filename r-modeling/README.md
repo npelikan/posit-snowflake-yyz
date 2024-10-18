@@ -4,15 +4,18 @@
 
 In this example, we use the `tidymodels` and `orbital` packages to train a machine learning model on Lending Club data and then run the inference *directly in Snowflake*. This is a game-changer for fast, efficient inference without the hassle of managing dependencies. The process generates raw SQL queries that Snowflake executes, showcasing Snowflake's compute power.
 
+
 ### What is `orbital`?
 
 [`orbital`](https://orbital.tidymodels.org/index.html) is a powerful package that transforms `tidymodels` `workflows`—including preprocessing and feature engineering—into SQL-compatible objects that can be executed directly against databases. Essentially, it converts a `workflow` into [quosures](https://rlang.r-lib.org/reference/topic-quosure.html), which are then translated into SQL via `dbplyr`. This means that once a `workflow` is converted into an `orbital` object, it can be run using Snowflake’s compute, leveraging its infrastructure for both preprocessing and inference.
 
+
 ### Why Should You Care About Dependencies?
 
-Managing dependencies can be one of the most painful aspects of running remote code.A prime example is the cumbersome process of managing third-party packages when using Snowflake's [Snowpark Python UDFs](https://docs.snowflake.com/en/developer-guide/snowpark/python/creating-udfs#using-third-party-packages-from-anaconda-in-a-udf), which relies on a limited conda channel. If the required package isn't available, you're out of luck.
+Managing dependencies can be one of the most painful aspects of running remote code. A prime example is the cumbersome process of managing third-party packages when using [Snowpark Python UDFs](https://docs.snowflake.com/en/developer-guide/snowpark/python/creating-udfs#using-third-party-packages-from-anaconda-in-a-udf), which relies on a limited conda channel. If the required package isn't available, you're out of luck. And there's no way to manage R dependencies in Snowflake!
 
 By translating models and preprocessing steps into SQL, `orbital` bypasses these challenges entirely. This allows seamless execution of models in Snowflake, eliminating the need for dependency management!
+
 
 ### Performance: How Fast Is It?
 
