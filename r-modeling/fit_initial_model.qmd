@@ -2,43 +2,10 @@
 title: "Running Models in Snowflake"
 ---
 
-## Data Ingestion
-
-Please run the following steps in your Snowflake Account _once_.
-
-```{sql}
-CREATE DATABASE IF NOT EXISTS LENDING_CLUB;
-CREATE SCHEMA IF NOT EXISTS ML;
-
-CREATE STAGE LENDING_CLUB.ML.LOAN_DATA
-  URL = 's3://posit-snowflake-mlops';
-
-CREATE OR REPLACE FILE FORMAT LENDING_CLUB.ML.FORMAT_LENDING_CLUB_PARQUET
-  TYPE = PARQUET
-  NULL_IF = ('NULL', 'null');
-
-CREATE OR REPLACE TABLE LENDING_CLUB.ML.LOAN_DATA
-  USING TEMPLATE (
-    SELECT ARRAY_AGG(OBJECT_CONSTRUCT(*))
-    FROM TABLE(
-      INFER_SCHEMA(
-        LOCATION => '@LENDING_CLUB.ML.LOAN_DATA/loan_data.parquet',
-        FILE_FORMAT => 'LENDING_CLUB.ML.FORMAT_LENDING_CLUB_PARQUET' -- Fully qualified name required
-      )
-    )
-  );
-
-COPY INTO LENDING_CLUB.ML.LOAN_DATA
-  FROM '@LENDING_CLUB.ML.LOAN_DATA/loan_data.parquet'
-  FILE_FORMAT = (FORMAT_NAME = LENDING_CLUB.ML.FORMAT_LENDING_CLUB_PARQUET)
-  MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
-
-```
-
 ## Connect to Snowflake
 
 <!-- 
-IMPORTANT -- if you're running this for the first time, you may run into namespacing errors in Connect or permissioning errors in Snowflake. That means someone has already run this with the same `model_name` -- to run this flawlessly, pick a new model_name below.
+IMPORTANT -- you'll probably need to change the warehouse name.
 -->
 
 ```{r setup}
@@ -58,6 +25,7 @@ con <- dbConnect(
 )
 
 model_name <- "r-interest-rate"
+model_version <- 1
 ```
 
 ## Load a sample of the data.
@@ -108,8 +76,6 @@ library(tidymodels)
 
 lendingclub_rec <- recipe(INT_RATE ~ ., data = lendingclub_prep) |>
   step_mutate(TERM = (TERM == "60 months")) |>
-  # step_dummy(TERM) |>
-  # step_mutate(TERM = trimws(substr(TERM, 1,4))) |> 
   step_mutate(across(!TERM, as.numeric)) |> 
   step_normalize(all_numeric_predictors()) |>
   step_impute_mean(all_of(c("BC_OPEN_TO_BUY", "BC_UTIL"))) |>   

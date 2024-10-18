@@ -32,13 +32,13 @@ These benefits are especially evident when working with larger datasets like Len
 
 ## How do I run this demo?
 
-Steps:
+**Steps:**
 
 1. Set up the Posit Workbench Native App using the steps in the root README
-2. Open Posit Workbench, start an RStudio Session and clone this repo
-3. Install `renv` using `install.packages("renv")`
-2. Open this project and restore th
-3. Create an .Renviron file containing `CONNECT_SERVER` (I recommend palm.ptd.posit.it) and `CONNECT_API_KEY`
-4. Edit the `model_name` variable in the first code cell.
-5. Run the notebook.
-6. Show the new Snowflake view working in Snowsight (aka the Snowflake UI). A great query to use is below:
+2. Open Posit Workbench, start an RStudio Session and clone this repo (you can use the instructions [here](https://argoshare.is.ed.ac.uk/healthyr_book/clone-an-existing-github-project-to-new-rstudio-project.html) )
+3. Install `renv` by running `install.packages("renv")` in the R console
+4. Open the project by clicking on modeling.Rproj
+5. Restore the packages needed by running the following commands in the R console:
+    1. `renv::init()`
+    2. `renv::restore()`
+6. Open `fit_initial_model.qmd`, and run!
