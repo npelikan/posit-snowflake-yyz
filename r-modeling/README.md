@@ -36,7 +36,7 @@ These benefits are especially evident when working with larger datasets like Len
 **Fitting your First `orbital` model:**
 
 1. Set up the Posit Workbench Native App using the steps in the root README
-2. Open Posit Workbench, start an RStudio Session and clone this repo (you can use the instructions [here](https://argoshare.is.ed.ac.uk/healthyr_book/clone-an-existing-github-project-to-new-rstudio-project.html) )
+2. Start an RStudio Session
 3. Install `renv` by running `install.packages("renv")` in the R console
 4. Open the project by clicking on modeling.Rproj
 5. Restore the packages needed by running the following commands in the R console:

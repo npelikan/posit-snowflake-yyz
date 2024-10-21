@@ -40,4 +40,5 @@ Posit + Snowflake Native App Enablement Session -- Toronto
 2. Grab a Posit Workbench License (there's a link in my slides!)
 3. Install the Posit Workbench Native App using the steps [here](https://docs.posit.co/ide/server-pro/2024.08.0/integration/snowflake/native-app/install.html).
 4. Make sure your default Snowflake role is set to SYSADMIN (why? [Snowflake won't allow you to sign in as ACCOUNTADMIN via OAuth](https://docs.snowflake.com/en/user-guide/oauth-custom#blocking-specific-roles-from-using-the-integration))
+5. Open an RStudio or VSCode Session in the Posit Workbench Native app and clone this repository.
 5. Head into one of the demo asset folders and try it out!
