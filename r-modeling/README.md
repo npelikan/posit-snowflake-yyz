@@ -29,13 +29,11 @@ These benefits are especially evident when working with larger datasets like Len
 
 ## Demo Assets:
 
-1.  `fit_initial_model.qmd` -- This contains a demonstration of grabbing some data from Snowflake, fitting a simple linear model to predict interest rates, and then conducting inference on snowflake compute using the `orbital` R package. It shows common MLOps actions (like model versioning and tracking) using Vetiver and Connect. It also demonstrates taking an orbital object and converting it to a native Snowflake object.
-2.  `refit_model.qmd` -- This is an example of using Connect as an MLOps monitoring/orchestration layer. This takes a model that already exists on Connect (created using `fit_initial_model.qmd`), evaluates its performance over time, attempts to refit the model, and, if the new model outperforms the existing model, it updates the Snowflake and Vetiver objects.
-
+1.  `fit_initial_model.qmd` -- This contains a demonstration of grabbing some data from Snowflake, fitting a simple linear model to predict interest rates, and then conducting inference on snowflake compute using the `orbital` R package. It shows common MLOps actions (like model versioning and tracking) using Vetiver and Connect. It also demonstrates taking an orbital object and converting it to a native Snowflake view.
 
 ## How do I run this demo?
 
-**Steps:**
+**Fitting your First `orbital` model:**
 
 1. Set up the Posit Workbench Native App using the steps in the root README
 2. Open Posit Workbench, start an RStudio Session and clone this repo (you can use the instructions [here](https://argoshare.is.ed.ac.uk/healthyr_book/clone-an-existing-github-project-to-new-rstudio-project.html) )
@@ -45,3 +43,26 @@ These benefits are especially evident when working with larger datasets like Len
     1. `renv::init()`
     2. `renv::restore()`
 6. Open `fit_initial_model.qmd`, and run!
+7. Head to Snowsight, and run the following query to see your model inference in action!
+    ```sql
+    SELECT 
+        a.id, 
+        a.term, 
+        a.loan_amnt,
+        b.".pred" AS predicted_interest_rate 
+    FROM 
+        LOAN_DATA a 
+        LEFT JOIN PREDICTED_INTEREST_RATES b ON a.id = b.id 
+    WHERE 
+        a.addr_state = 'PA';
+    ```
+
+**Deploying the model as an API to Posit Connect**
+1. Login to your Posit Connect Server (it's in my slides!)
+2. Click your username in the top right and generate an API key
+3. Create a file, named .Renviron with the following content:
+    ```
+    CONNECT_SERVER=<the url of your Posit Connect Server>
+    CONNECT_API_KEY=<your API key>
+    ```
+4. Uncomment the commented code cells in `fit_initial_model.qmd`, and re-run!

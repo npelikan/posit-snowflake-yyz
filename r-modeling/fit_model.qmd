@@ -20,7 +20,7 @@ library(vetiver)
 
 con <- dbConnect(
   odbc::snowflake(),
-  warehouse = "DEFAULT_WH",
+  warehouse = "DEFAULT_WH", # NOTE: Change me!
   database = "LENDING_CLUB",
   schema = "ML"
 )
@@ -107,6 +107,24 @@ lendingclub_metrics <- lendingclub_fit |>
 lendingclub_metrics
 ```
 
+3. If you're using Posit Connect, uncomment the following lines to register the model and save it!
+
+```{r}
+# library(vetiver)
+# library(pins)
+# library(arrow)
+
+# board <- board_connect()
+# v <- vetiver_model(lendingclub_fit, model_name, metadata = list(metrics = lendingclub_metrics))
+# board |> vetiver_pin_write(v)
+
+# model_versions <- board |>
+#   pin_versions(glue("{board$account}/{model_name}"))
+
+# model_version <- model_versions |>
+#   filter(active) |>
+#   pull(version)
+```
 
 ## Convert to an Orbital Object
 
@@ -227,4 +245,12 @@ con |>
   tbl(main_view_name) |>
   head(500) |>
   collect()
+```
+
+## Real-time inference
+
+But what if, rather than batch inference, we want to do realtime inference? We can easily do that via deploying the model as an API to Posit Connect!
+
+```{r}
+# vetiver_deploy_rsconnect(board, glue("{board$account}/{model_name}"))
 ```
