@@ -49,12 +49,12 @@ These benefits are especially evident when working with larger datasets like Len
         a.id, 
         a.term, 
         a.loan_amnt,
-        b.".pred" AS predicted_interest_rate 
+        ROUND(b.".pred", 5) AS predicted_interest_rate
     FROM 
         LOAN_DATA a 
         LEFT JOIN "r-interest-rate_latest" b ON a.id = b.id 
     WHERE 
-        a.addr_state = 'PA';
+        a.addr_state = 'PA' AND b.".pred" IS NOT NULL;
     ```
 
 **Deploying the model as an API to Posit Connect**
