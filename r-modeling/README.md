@@ -22,14 +22,14 @@ By translating models and preprocessing steps into SQL, `orbital` bypasses these
 It’s *really* fast! Running model inference in Snowflake offers two major advantages:
 
 1. You tap into Snowflake’s scalable compute engine.
-2. Snowflake’s query optimizer can enhance the performance of the model fitting process by trimming unnecessary operations and boosting efficiency.
+2. Snowflake’s query optimizer can enhance the performance of the model inference process by trimming unnecessary operations and boosting efficiency.
 
 These benefits are especially evident when working with larger datasets like Lending Club’s, which has 151 columns and 2.3 million rows. You can demonstrate this live by fitting a model in Snowflake in real-time!
 
 
 ## Demo Assets:
 
-1.  `fit_initial_model.qmd` -- This contains a demonstration of grabbing some data from Snowflake, fitting a simple linear model to predict interest rates, and then conducting inference on snowflake compute using the `orbital` R package. It shows common MLOps actions (like model versioning and tracking) using Vetiver and Connect. It also demonstrates taking an orbital object and converting it to a native Snowflake view.
+`fit_model.qmd` -- This contains a demonstration of grabbing some data from Snowflake, fitting a simple linear model to predict interest rates, and then conducting inference on snowflake compute using the `orbital` R package. It shows common MLOps actions (like model versioning and tracking) using Vetiver and Connect. It also demonstrates taking an orbital object and converting it to a native Snowflake view.
 
 ## How do I run this demo?
 
