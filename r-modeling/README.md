@@ -65,4 +65,5 @@ These benefits are especially evident when working with larger datasets like Len
     CONNECT_SERVER=<the url of your Posit Connect Server>
     CONNECT_API_KEY=<your API key>
     ```
-4. Uncomment the commented code cells in `fit_model.qmd`, and re-run!
+4. Change the model name in the first cell of `fit_model.qmd`
+5. Uncomment the commented code cells in `fit_model.qmd`, and re-run!
