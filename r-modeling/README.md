@@ -57,7 +57,7 @@ These benefits are especially evident when working with larger datasets like Len
         a.addr_state = 'PA' AND b.".pred" IS NOT NULL;
     ```
 
-**Deploying the model as an API to Posit Connect**
+**Versioning and Deploying the model as an API to Posit Connect**
 1. Login to your Posit Connect Server (it's in my slides!)
 2. Click your username in the top right and generate an API key
 3. Create a file, named .Renviron with the following content:
@@ -65,4 +65,4 @@ These benefits are especially evident when working with larger datasets like Len
     CONNECT_SERVER=<the url of your Posit Connect Server>
     CONNECT_API_KEY=<your API key>
     ```
-4. Uncomment the commented code cells in `fit_initial_model.qmd`, and re-run!
+4. Uncomment the commented code cells in `fit_model.qmd`, and re-run!
