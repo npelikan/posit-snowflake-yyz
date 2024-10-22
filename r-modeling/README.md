@@ -2,7 +2,7 @@
 
 ## High-Level Overview:
 
-In this example, we use the `tidymodels` and `orbital` packages to train a machine learning model on Lending Club data and then run the inference *directly in Snowflake*. This is a game-changer for fast, efficient inference without the hassle of managing dependencies. The process generates raw SQL queries that Snowflake executes, showcasing Snowflake's compute power.
+In this example, we use the `tidymodels` and `orbital` packages to train a machine learning model on [Lending Club loan data](https://www.kaggle.com/datasets/wordsforthewise/lending-club) and then run the inference *directly in Snowflake*. This is a game-changer for fast, efficient inference without the hassle of managing dependencies. The process generates raw SQL queries that Snowflake executes, showcasing Snowflake's compute power.
 
 
 ### What is `orbital`?
