@@ -52,7 +52,7 @@ These benefits are especially evident when working with larger datasets like Len
         b.".pred" AS predicted_interest_rate 
     FROM 
         LOAN_DATA a 
-        LEFT JOIN PREDICTED_INTEREST_RATES b ON a.id = b.id 
+        LEFT JOIN "r-interest-rate_latest" b ON a.id = b.id 
     WHERE 
         a.addr_state = 'PA';
     ```
